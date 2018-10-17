@@ -8,9 +8,7 @@ vcftools --vcf AOMexGBS2_ZeaGBSv27impV5.vcf --out missing_AOMexGBS2 --missing-in
 
 vcftools --vcf MinimallyFilteredWithNAM_InbredLandraces_InbredTeosintes.vcf --out missing_swarts2017  --missing-indv
 
-srun R CMD BATCH 09_keeptaxa.R
-#THEN SEE R FILE FOR VARIOUS STEPS REQUIRED TO CONVERT COORDINATES OF SNPS TO SAME REFERENCE MAP BEFORE NEXT LINE
-
+srun R CMD BATCH 012_keeptaxa.R
 
 
 
