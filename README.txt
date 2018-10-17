@@ -192,3 +192,6 @@ Script 016_plotPCA_swartsanna.R
 			pca_MergeSwartsAnna_802.txt
 	output:	swartsannaPCA.pdf
 	packages: base R only
+	
+	
+AOMexGBS2_ZeaGBSv27impV5.h5 is available in an alternate format on figshare, available upon publication 10.6084/m9.figshare.4714030
