@@ -3,6 +3,22 @@ Scripts with files used and made by scripts, packages, and notes
 *indicates files must be provided by authors
 **indicates files downloaded and from other published work
 
+Script 000_gxeonly.R
+	purpose: fit models for plastic respones, GxE of plant population or family to soil biota
+	problem?: is that there is some confusion on dataframe traits used to run it. only 90% sure used right data
+	input:	phenomat.csv*
+			pedmat.csv*
+			covmat.csv*
+			AlphabeticalPopEnvDat.csv*
+	output:	popdamtraits_soils.pdf
+			traitgxemodels.Rdata
+			traitgxemodelsELEV.Rdata
+			traitgxemodelsTAnn.Rdata
+			traitgxemodelsPann.Rdata
+			traitgxemodelsSWC.Rdata
+			04_02_gxeresults.txt
+	packages: MCMCglmm
+
 Script: 001_formatgenos.sh (uses tassel version 5 to handle h5 file)
 	purpose: formats genotype file, filters to sites with data in 95% of samples
 	input:	AOMexGBS2_ZeaGBSv27impV5.h5*
@@ -55,7 +71,7 @@ Script 004_Driftsel_results_figures.R
 			bivariate sigdiffs by trait CI 95 names means torder 440.pdf
 	packages: driftsel 2.1.2, SDMTools, and dependencies
 
-Script 003_003_5traitAnimalModelComparison.R
+Script 005_5traitAnimalModelComparison.R
 	purpose: fit G matrices
 	input:	phenomat.csv*
 			pedmat.csv*
@@ -66,7 +82,7 @@ Script 003_003_5traitAnimalModelComparison.R
 			Popsoil_Peds.Rdata
 	packages: MCMCglmm
 
-Script 00checkconv.R
+Script 006_checkconv.R
 	purpose: inspect traces of G matrix model fitting
 	input:	popsoil.animal.mods.5trait.Rdata
 			popsoil.animal.mods.nearlyimp.prior.5trait.Rdata
@@ -74,28 +90,12 @@ Script 00checkconv.R
 	output:	trace plots of MCMC chains for each of 30 G matrices for each of the three priors
 	packages: MCMCglmm
 
-Script 004_002_heritability.R
+Script 007_heritability.R
 	input:	popsoil.animal.mods.5trait.Rdata
 	output:	heritabilities.pdf
 	packages: MCMCglmm
 	
-Script 004_002_gxeonly.R
-	purpose: fit models for plastic respones, GxE of plant population or family to soil biota
-	problem?: is that there is some confusion on dataframe traits used to run it. only 90% sure used right data
-	input:	phenomat.csv*
-			pedmat.csv*
-			covmat.csv*
-			AlphabeticalPopEnvDat.csv*
-	output:	popdamtraits_soils.pdf
-			traitgxemodels.Rdata
-			traitgxemodelsELEV.Rdata
-			traitgxemodelsTAnn.Rdata
-			traitgxemodelsPann.Rdata
-			traitgxemodelsSWC.Rdata
-			04_02_gxeresults.txt
-	packages: MCMCglmm
-
-Script 004_003_eigentensors.R
+Script 008_eigentensors.R
 	purpose: eigentensor analysis of G matrices
 	input:	popsoil.animal.mods.5trait.Rdata
 			popsoil.animal.mods.nearlyimp.prior.5trait.Rdata
@@ -108,7 +108,7 @@ Script 004_003_eigentensors.R
 			[variance explained by eigentensors and eigenvalues of eigentensors]
 	packages: gdata, matrixcalc, MCMCglmm, dependencies
 	
-Script 004_004_selproj.R
+Script 009_selproj.R
 	purpose: Project responses to selection, generate figures
 	input:	popsoil.animal.mods.5trait.Rdata
 			popsoil.animal.mods.nearlyimp.prior.5trait.Rdata
@@ -119,7 +119,7 @@ Script 004_004_selproj.R
 			soil_sel_all.pdf
 	packages: ks, MCMCglmm, dependencies
 			
-Script 004_005_Gmatplots.R
+Script 010_Gmatplots.R
 	purpose: Plot of G matrices
 	input:	popsoil.animal.mods.5trait.Rdata
 			popsoil.animal.mods.nearlyimp.prior.5trait.Rdata
@@ -130,17 +130,17 @@ Script 004_005_Gmatplots.R
 	packages: MCMCglmm
 
 
-Script 009_swartssnps1.sh
+Script 011_swartssnps1.sh
 	purpose: generate missingness data, filter to taxa to use in PCA
 	input:	AOMexGBS2_ZeaGBSv27impV5.h5*
 			MinimallyFilteredWithNAM_InbredLandraces_InbredTeosintes.vcf**
-			009_keeptaxa.R*
+			012_keeptaxa.R*
 	output:	AOMexGBS2_ZeaGBSv27impV5.vcf
 			missing_swarts2017.imiss
 			missing_AOMexGBS2.imiss
 	packages: gcc jdk/1.8 tassel/5 vcftools/0.1.13
 
-Script 009_keeptaxa.R
+Script 012_keeptaxa.R
 	purpose: get a set of samples with enough SNP calls from both datasets to use in PCA
 	input:	swarts_taxatokeep_firstpass.csv*
 			missing_swarts2017.imiss
@@ -149,7 +149,7 @@ Script 009_keeptaxa.R
 			AOMexGBS2_indFilt70.txt
 	packages: base R only
 
-Script 009_matchrefgen_SwartsAnnaSNPs1.R
+Script 013_matchrefgen_SwartsAnnaSNPs1.R
 	purpose: export as a bed file
 	input: MinimallyFilteredWithNAM_InbredLandraces_InbredTeosintes.vcf**
 	output: MinimallyFilteredWithNAM_InbredLandraces_InbredTeosintes_forconversion.bed
@@ -162,7 +162,7 @@ Manual action on ENSEMBL required for coordinate conversion of swarts snp files,
 	output:	output_MinimallyFilteredWithNAM_InbredLandraces_InbredTeosintes_forconversion.bed
 			output_output_MinimallyFilteredWithNAM_InbredLandraces_InbredTeosintes_forconversion.bed
 
-Script 009_matchrefgen_SwartsAnnaSNPs2.R
+Script 014_matchrefgen_SwartsAnnaSNPs2.R
 	purpose: set up files to get coordinates for two GBS datasets in PCA analysis
 	input: 	MinimallyFilteredWithNAM_InbredLandraces_InbredTeosintes.vcf**
 			AOMexGBS2_ZeaGBSv27impV5.vcf
@@ -171,7 +171,7 @@ Script 009_matchrefgen_SwartsAnnaSNPs2.R
 	output: MinimallyFilteredWithNAM_InbredLandraces_InbredTeosintes_agpv3_ConvertedTo_agpv2.vcf
 	packages: base R
 
-Script 009_swartssnps2.sh
+Script 015_swartssnps2.sh
 	purpose: merge two Zea GBS datasets, filter SNPs, run PCA analysis
 	input:	MinimallyFilteredWithNAM_InbredLandraces_InbredTeosintes.vcf**
 			MinimallyFilteredWithNAM_InbredLandraces_InbredTeosintes_agpv3_ConvertedTo_agpv2.vcf
@@ -186,7 +186,7 @@ Script 009_swartssnps2.sh
 			pca_MergeSwartsAnna_803.txt
 	packages: gcc jdk/1.8 tassel/5.2.14 plink/1.90 vcftools/0.1.13
 
-Script 009_plotPCA_swartsanna.R
+Script 016_plotPCA_swartsanna.R
 	purpose: Plot of PCA of current and other Zea genotype data
 	input:	pca_MergeSwartsAnna_801.txt
 			pca_MergeSwartsAnna_802.txt
