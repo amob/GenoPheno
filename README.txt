@@ -195,3 +195,5 @@ Script 016_plotPCA_swartsanna.R
 	
 	
 AOMexGBS2_ZeaGBSv27impV5.h5 is available in an alternate format on figshare, available upon publication 10.6084/m9.figshare.4714030
+
+Data from Swarts et al 2017 (Science, DOI: 10.1126/science.aam9425) obtained from: http://datacommons.cyverse.org/browse/iplant/home/shared/panzea/dataFromPubs/Swarts2017Science
