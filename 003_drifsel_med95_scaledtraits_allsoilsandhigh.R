@@ -22,7 +22,7 @@ allped <- read.csv("~/GenoPheno/pedmat.csv",stringsAsFactors=F,header=T)
 allped$sire.pop[which(allped$sire.pop=="ml")]="m" 
 allped$dam.pop[which(allped$dam.pop=="ml")]="m"
 #this is so that they come out as being the 5th in the alphabet, because the pop that is malinalco in the provided coancestry matrix is row/column 5. 
-#if it is re-run with population of malinalco specified as ML, it would come out 6th in factor levels, and this changes wouldn't be needed
+#if it is re-run with population of malinalco 6th in genotype order and labeled as "ML", it would come out 6th in both coancestry and factor levels
 allped$dam.pop<-as.numeric(as.factor(allped$dam.pop))
 allped$sire.pop<- as.numeric(as.factor(allped$sire.pop))
 colnames(allpheno)[1]<- "ID"
