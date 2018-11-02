@@ -5,7 +5,6 @@ Scripts with files used and made by scripts, packages, and notes
 
 Script 000_gxeonly.R
 	purpose: fit models for plastic respones, GxE of plant population or family to soil biota
-	problem?: is that there is some confusion on dataframe traits used to run it. only 90% sure used right data
 	input:	phenomat.csv*
 			pedmat.csv*
 			covmat.csv*
@@ -28,7 +27,7 @@ Script: 001_formatgenos.sh (uses tassel version 5 to handle h5 file)
 			 
 Script: 002_RAFM_taxa95.R  
 	purpose: fits coancestry matrix, makes coancestry figure
-	problem?: ML vs M. does it sort by alphabet or by order it encounters?
+	of note: one pop is alternately labeled ML vs M. Factors in R sort by alphabet, but RAFM sorts by order it encounters a population in the input dataframes
 	input:	AOMexGBS2_ZeaGBSv27impV5_95filter.plk.ped
 			popmomlabel.csv*
 			AlphabeticalPopEnvDat.csv*
@@ -39,7 +38,7 @@ Script: 002_RAFM_taxa95.R
 			
 Script 003_drifsel_med95_scaledtraits_allsoilsandhigh.R 
 	purpose: performs driftsel analysis, S and H tests
-	problem?: different amounts of thinning for some of the highland runs
+	of note: different amounts of thinning for some of the highland samples only runs
 	input:	allcoan_Rthin_f95_LG.txt
 			phenomat.csv*
 			pedmat.csv*
