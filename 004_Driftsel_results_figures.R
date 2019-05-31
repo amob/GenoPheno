@@ -129,8 +129,11 @@ return(list(outmats,popout))
 envmatall <-read.csv("~/Dropbox/AO-3 mine/AlphabeticalPopEnvDat.csv")
 envmat <- envmatall[,c(1,4,48)]#just mean temp, annual precip, and soil water holding capacity
 
-gy <-colorRampPalette(c(rgb(1,1,0),rgb(1,1,1),rgb(0,.5,0)))
+# color palettes
+wtob <- colorRampPalette(c(rgb(1,1,1),rgb(0,0,0.5)))
 rb <-colorRampPalette(c(rgb(0,0,1),rgb(1,0,0)))
+gp <-colorRampPalette(c(rgb(0.5,0,0.75),rgb(1,1,1),rgb(0,0.5,0)))
+
 
 alphtomat <- order(envmat$TAnn,decreasing=T)
 
@@ -161,43 +164,51 @@ poptr.mc <- getoutside(samp.mc,9,10,CI=.95)
 poptr.tc <- getoutside(samp.tc,9,10,CI=.95)
 
 
+poptr.mt.9 <- getoutside(samp.mt,9,10,CI=.9)
+poptr.mc.9 <- getoutside(samp.mc,9,10,CI=.9)
+poptr.tc.9 <- getoutside(samp.tc,9,10,CI=.9)
+
+
+
+
+divrange <-  round(c(-1*max( max(abs(poptr.mt[[2]])),max(abs(poptr.mc[[2]])),max(abs(poptr.tc[[2]])) ),max( max(abs(poptr.mt[[2]])),max(abs(poptr.mc[[2]])),max(abs(poptr.tc[[2]])) ) ),digits=1)
+#based on this, 
 pdf("~/Dropbox/AO-3 mine/scaled traits/sigdiffs by pop and trait CI 95 names means torder 440.pdf",width=8,height=4)
-layout(matrix(1:5,ncol=5),widths=c(1.6,3,3,3,1.5))
-
-par(mar=c(13,6,3,0))
-image(1,seq(from=.5,to=9.5,by=1),t(matrix(rev(sort(envmat$TAnn)),nrow=10)),col=rb(50),zlim=c(129,198),ylim=c(0,10),ylab="",xlab="",bty="n",xaxt="n",yaxt="n")
-axis(side=2, at=seq(from=.5,to=9.5,by=1), labels=tempnames, las=2, cex.axis = 1.5)
-mtext("Plant population MAT (row)", side=2, line =3.75, cex =1)
-par(mar=c(13,1,3,1))
-image(1:9,seq(from=.5,to=9.5,by=1),t(poptr.mt[[2]][alphtomat,]),ylim=c(0,10),axes=F,ylab="",xlab="",col=gy(50),zlim=c(-1.5,1.5),main="Biota15.0",cex.main=1.5)#Mateo tezoquipan, mat 15.0
-points(0,0)
-for(i in 1:10){
-yval <- seq(from=.5,to=9.5,by=1)[i]
-points(rep(yval,times=9)~c(1:9), pch= ifelse(as.numeric(poptr.mt[[1]][alphtomat,][i,])>0, "*",NA),cex=1.5)
-}
-axis(side=1, at=1:9, labels=prettytraitnames, las=2, cex.axis = 1.5)
-
-par(mar=c(13,1,3,1))
-image(1:9,seq(from=.5,to=9.5,by=1),t(poptr.mc[[2]][alphtomat,]),ylim=c(0,10),axes=F,ylab="",xlab="",col=gy(50),zlim=c(-1.5,1.5),main="Biota14.3",cex.main=1.5)#matias cuijingo, mat 14.3
-points(0,0)
-for(i in 1:10){
-yval <- seq(from=.5,to=9.5,by=1)[i]
-points(rep(yval,times=9)~c(1:9), pch= ifelse(as.numeric(poptr.mc[[1]][alphtomat,][i,])>0, "*",NA),cex=1.5)
-}
-axis(side=1, at=1:9, labels=prettytraitnames, las=2, cex.axis = 1.5)
-
-par(mar=c(13,1,3,1))
-image(1:9,seq(from=.5,to=9.5,by=1),t(poptr.tc[[2]][alphtomat,]),ylim=c(0,10),axes=F,ylab="",xlab="",col=gy(50),zlim=c(-1.5,1.5),main="Biota13.0",cex.main=1.5)#toluca C, mat 14.3
-points(0,0)
-for(i in 1:10){
-yval <- seq(from=.5,to=9.5,by=1)[i]
-points(rep(yval,times=9)~c(1:9), pch= ifelse(as.numeric(poptr.tc[[1]][alphtomat,][i,])>0, "*",NA),cex=1.5)
-}
-axis(side=1, at=1:9, labels=prettytraitnames, las=2, cex.axis = 1.5)
-par(mar=c(13,0,1,0))
-plot(c(1,10)~c(1,2),xaxt="n", yaxt="n",bty="n",pch=NA,ylab="",xlab="")
-legend.gradient(cbind(c(1,1.25,1.25,1),c(1,1,9,9)),cols=gy(50),title="divergence",limits=c("-1.5","1.5"),cex=1.5)
-
+	layout(matrix(1:5,ncol=5),widths=c(1.6,3,3,3,1.5))
+	par(mar=c(13,6,3,0))
+	image(1,seq(from=.5,to=9.5,by=1),t(matrix(rev(sort(envmat$TAnn)),nrow=10)),col=rb(50),zlim=c(129,198),ylim=c(0,10),ylab="",xlab="",bty="n",xaxt="n",yaxt="n")
+		axis(side=2, at=seq(from=.5,to=9.5,by=1), labels=tempnames, las=2, cex.axis = 1.5)
+		mtext("Plant population MAT (row)", side=2, line =3.75, cex =1)
+		par(mar=c(13,1,3,1))
+	image(1:9,seq(from=.5,to=9.5,by=1),t(poptr.mt[[2]][alphtomat,]),ylim=c(0,10),axes=F,ylab="",xlab="",col=gp(50),zlim=divrange,main="Biota15.0",cex.main=1.5)#Mateo tezoquipan, mat 15.0
+		points(0,0)
+		for(i in 1:10){
+			yval <- seq(from=.5,to=9.5,by=1)[i]
+			points(rep(yval,times=9)~c(1:9), pch= ifelse(as.numeric(poptr.mt[[1]][alphtomat,][i,])>0, "*",NA),cex=2)
+			points(rep(yval,times=9)~c(1:9), pch= ifelse(as.numeric(poptr.mt.9[[1]][alphtomat,][i,]) - as.numeric(poptr.mt[[1]][alphtomat,][i,]) >0, 1,NA),cex=1)
+		}
+		axis(side=1, at=1:9, labels=prettytraitnames, las=2, cex.axis = 1.5)
+	par(mar=c(13,1,3,1))
+	image(1:9,seq(from=.5,to=9.5,by=1),t(poptr.mc[[2]][alphtomat,]),ylim=c(0,10),axes=F,ylab="",xlab="",col=gp(50),zlim=divrange,main="Biota14.3",cex.main=1.5)#matias cuijingo, mat 14.3
+		points(0,0)
+		for(i in 1:10){
+			yval <- seq(from=.5,to=9.5,by=1)[i]
+			points(rep(yval,times=9)~c(1:9), pch= ifelse(as.numeric(poptr.mc[[1]][alphtomat,][i,])>0, "*",NA),cex=2)
+			points(rep(yval,times=9)~c(1:9), pch= ifelse(as.numeric(poptr.mc.9[[1]][alphtomat,][i,]) - as.numeric(poptr.mc[[1]][alphtomat,][i,])>0, 1,NA),cex=1)
+		}
+		axis(side=1, at=1:9, labels=prettytraitnames, las=2, cex.axis = 1.5)
+	par(mar=c(13,1,3,1))
+	image(1:9,seq(from=.5,to=9.5,by=1),t(poptr.tc[[2]][alphtomat,]),ylim=c(0,10),axes=F,ylab="",xlab="",col=gp(50),zlim=divrange,main="Biota13.0",cex.main=1.5)#toluca C, mat 14.3
+		points(0,0)
+		for(i in 1:10){
+			yval <- seq(from=.5,to=9.5,by=1)[i]
+			points(rep(yval,times=9)~c(1:9), pch= ifelse(as.numeric(poptr.tc[[1]][alphtomat,][i,])>0, "*",NA),cex=2)
+			points(rep(yval,times=9)~c(1:9), pch= ifelse(as.numeric(poptr.tc.9[[1]][alphtomat,][i,])-as.numeric(poptr.tc[[1]][alphtomat,][i,])>0, 1,NA),cex=1)
+		}
+		axis(side=1, at=1:9, labels=prettytraitnames, las=2, cex.axis = 1.5)
+	par(mar=c(13,0,1,0))
+	plot(c(1,10)~c(1,2),xaxt="n", yaxt="n",bty="n",pch=NA,ylab="",xlab="")
+		legend.gradient(cbind(c(1,1.25,1.25,1),c(1,1,9,9)),cols=gp(50),title="divergence",limits=as.character(divrange),cex=1.5)
 dev.off()
 
 
@@ -207,35 +218,73 @@ bivar.tc <- getoutsideBiVar(samp.tc,9,10,CI=.95)
 WtoB <- colorRampPalette(c(rgb(.9,.9,.9),rgb(0,0,1),rgb(0,0,.25)))
 WtoW <- colorRampPalette(c(rgb(1,1,1),rgb(1,1,1)))
 
-pdf("~/Dropbox/AO-3 mine/scaled traits/bivariate sigdiffs by trait CI 95 names means torder 440.pdf",width=14,height=5.5)
- layout(matrix(c(1:14),nrow=2,ncol=7),widths=c(rep(c(0.5,2),times=3),0.3),heights=rev(c(0.5,2)))
- par(oma = c(12,12,1,3))
+#number of traits in any trait combo
+# note bc of flowering time univariate always least one pop always detected so any trait in combo with flowering time must have at least one pop outside
+#number of pops detected div in any trait combo, (out of 10 poss per soil)
+sum(unlist( lapply(1:length(bivar.mt[[1]]),function(z) sign(sum(unlist(bivar.mt[[1]][z]),na.rm=T )) )))
+sum(unlist( lapply(1:length(bivar.mc[[1]]),function(z) sign(sum(unlist(bivar.mc[[1]][z]),na.rm=T )) )))
+sum(unlist( lapply(1:length(bivar.tc[[1]]),function(z) sign(sum(unlist(bivar.tc[[1]][z]),na.rm=T )) )))
+#total detections (out of 360 poss per soil)
+sum(unlist( lapply(1:length(bivar.mt[[1]]),function(z) (sum(unlist(bivar.mt[[1]][z]),na.rm=T )) ) ))
+sum(unlist( lapply(1:length(bivar.mc[[1]]),function(z) (sum(unlist(bivar.mc[[1]][z]),na.rm=T )) ) ))
+sum(unlist( lapply(1:length(bivar.tc[[1]]),function(z) (sum(unlist(bivar.tc[[1]][z]),na.rm=T )) ) ))
+#times each population detected outside as a vector
+bivar.mt.pops <- unlist( lapply(1:length(bivar.mt[[1]]),function(z) sum(unlist(bivar.mt[[1]][z]),na.rm=T ) ) ) 
+bivar.mc.pops <- unlist( lapply(1:length(bivar.mc[[1]]),function(z) sum(unlist(bivar.mc[[1]][z]),na.rm=T ) ) )
+bivar.tc.pops <- unlist( lapply(1:length(bivar.tc[[1]]),function(z) sum(unlist(bivar.tc[[1]][z]),na.rm=T ) ) )
 
+
+wtog2 <- colorRampPalette(c(rgb(0.8,0.8,0.8),rgb(0,1,0)) )
+
+pdf("~/Dropbox/AO-3 mine/scaled traits/bivariate sigdiffs by trait CI 95 names means torder 440.pdf",width=13,height=7)
+ layout(matrix(c(1:21),nrow=3,ncol=7),widths=c(rep(c(0.4,2),times=3),0.3),heights=rev(c(0.5,1.25,2)))
+ par(oma = c(5,12,2,3))
  #mt
   par(mar=c(1,1,1,1))
  image( matrix((rev(colSums(poptr.mt[[1]]))),nrow=1),col=WtoB(11),xaxt="n",yaxt="n",zlim=c(0,10))
 axis(side=2, at=seq(from=0,to=1,length.out=9), labels=rev(prettytraitnames), las=1, cex.axis = 1.5)
  image( matrix((colSums(poptr.mt[[1]])),nrow=1),col=WtoW(3),xaxt="n",yaxt="n",bty="n") 
+ image( matrix((colSums(poptr.mt[[1]])),nrow=1),col=WtoW(3),xaxt="n",yaxt="n",bty="n") 
  image( bivar.mt[[2]][,9:1],col=WtoB(11),xaxt="n",yaxt="n",zlim=c(0,10),main="Biota15.0",cex.main=1.5)
+  par(mar=c(12,1,1,1))
  image( matrix((colSums(poptr.mt[[1]])),ncol=1),col=WtoB(11),xaxt="n",yaxt="n",zlim=c(0,10))
  axis(side=1, at=seq(from=0,to=1,length.out=9), labels=prettytraitnames, las=3, cex.axis = 1.5)
+  par(mar=c(1,1,1,1))
+image( matrix(bivar.mt.pops[alphtomat],ncol=1),col=wtog2(35),xaxt="n",yaxt="n",zlim=c(1,36))
+ axis(side=1, at=seq(from=0,to=1,length.out=10), labels=tempnames, las=3, cex.axis = 1.5)
+axis(side=2, at=c(0), labels=c("Contributing populations"), las=1, cex.axis = 1.5)
+	mtext("MAT of population",side = 1,line=4)
 #mc
  image( matrix((rev(colSums(poptr.mc[[1]]))),nrow=1),col=WtoB(11),xaxt="n",yaxt="n",zlim=c(0,10))
  image( matrix((colSums(poptr.mc[[1]])),nrow=1),col=WtoW(3),xaxt="n",yaxt="n",zlim=c(0,10),bty="n")
+ image( matrix((colSums(poptr.mc[[1]])),nrow=1),col=WtoW(3),xaxt="n",yaxt="n",zlim=c(0,10),bty="n")
  image( bivar.mc[[2]][,9:1],col=WtoB(11),xaxt="n",yaxt="n",main="Biota14.3",cex.main=1.5,zlim=c(0,10))
- image( matrix((colSums(poptr.mc[[1]])),ncol=1),col=WtoB(11),xaxt="n",yaxt="n",zlim=c(0,10))
+   par(mar=c(12,1,1,1))
+image( matrix((colSums(poptr.mc[[1]])),ncol=1),col=WtoB(11),xaxt="n",yaxt="n",zlim=c(0,10))
  axis(side=1, at=seq(from=0,to=1,length.out=9), labels=prettytraitnames, las=3, cex.axis = 1.5)
+  par(mar=c(1,1,1,1))
+ image( matrix(bivar.mc.pops[alphtomat],ncol=1),col=wtog2(35),xaxt="n",yaxt="n",zlim=c(1,36))
+ axis(side=1, at=seq(from=0,to=1,length.out=10), labels=tempnames, las=3, cex.axis = 1.5)
+	mtext("MAT of population",side = 1,line=4)
 #tc
  image( matrix((rev(colSums(poptr.tc[[1]]))),nrow=1),col=WtoB(11),xaxt="n",yaxt="n",zlim=c(0,10))
  image( matrix((colSums(poptr.tc[[1]])),nrow=1),col=WtoW(3),xaxt="n",yaxt="n",zlim=c(0,10),bty="n")
+ image( matrix((colSums(poptr.tc[[1]])),nrow=1),col=WtoW(3),xaxt="n",yaxt="n",zlim=c(0,10),bty="n")
  image( bivar.tc[[2]][,9:1],col=WtoB(11),xaxt="n",yaxt="n",main="Biota13.0",cex.main=1.5,zlim=c(0,10))
- image( matrix((colSums(poptr.tc[[1]])),ncol=1),col=WtoB(11),xaxt="n",yaxt="n",zlim=c(0,10))
+   par(mar=c(12,1,1,1))
+image( matrix((colSums(poptr.tc[[1]])),ncol=1),col=WtoB(11),xaxt="n",yaxt="n",zlim=c(0,10))
   axis(side=1, at=seq(from=0,to=1,length.out=9), labels=prettytraitnames, las=3, cex.axis = 1.5)
+   par(mar=c(1,1,1,1))
+ image( matrix(bivar.tc.pops[alphtomat],ncol=1),col=wtog2(35),xaxt="n",yaxt="n",zlim=c(1,36))
+ axis(side=1, at=seq(from=0,to=1,length.out=10), labels=tempnames, las=3, cex.axis = 1.5)
+	mtext("MAT of population",side = 1,line=4)
 #legend
   par(mar=c(1,2,1,1))
  image( matrix(0:10,nrow=1),col=WtoB(11),xaxt="n",yaxt="n",zlim=c(0,10))
 axis(side=4, at=c(0,1), labels=c("0","10"), las=1, cex.axis = 1.5)
-mtext("Populations more diverged than expected",side=2)
- image( matrix(0<(colSums(poptr.tc[[1]])),nrow=1),col=WtoW(3),xaxt="n",yaxt="n",zlim=c(0,10),bty="n")
-
+mtext("# significant populations",side=2)
+ image( matrix(1:36,nrow=1),col=wtog2(35),xaxt="n",yaxt="n",zlim=c(1,36))
+axis(side=4, at=c(0,1), labels=c("1","36"), las=1, cex.axis = 1.5)
+mtext("# significant bivariate cases",side=2)
+ image( matrix(0:36,nrow=1),col=WtoW(36),xaxt="n",yaxt="n",zlim=c(1,36),bty="n")
 dev.off()
