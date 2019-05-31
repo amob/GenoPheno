@@ -37,7 +37,7 @@ tnames5 <- c("Days to flowering","Days to germination","Shoot biomass","Root bio
 
 rbd<-colorRampPalette(c(rgb(.8,0,0),rgb(.8,0,0,alpha=.5),rgb(1,1,1),rgb(0,0,.8,alpha=.5),rgb(0,0,.8)))
 
-Gnames.ps <- paste(rep(c("cu","cl","da","fp","m","mc","mt","tc","tx","tz"),times=3),".",rep(c("mt","mc","tc"),each=10),sep="")#represents actual order of Gs. looks like mt mc swapped here.
+Gnames.ps <- paste(rep(c("cl","cu","da","fp","m","mc","mt","tc","tx","tz"),times=3),".",rep(c("mt","mc","tc"),each=10),sep="")#represents actual order of Gs. mt mc swapped here relative to some other arrangments.
 #Gnames.ps useful for checking rearranging vectors to make sure they rearrange things as you think
 swapsoilpoptemp <- rep(c(10,5,9,7,3,4,6,1,8,2),times=3) + rep(c(0,10,20),each=10)#its going to fill by rows below, so we want first one soil, then the next then the last, almost as it is., pops in temp order
 AnPopsoilGs.5T <- apply(An.popsoil.5T,c(1,2,3),mean) [,,swapsoilpoptemp]#all three tz matrices first, all three cu last, rearranged to be mc mt tc alphabetical
