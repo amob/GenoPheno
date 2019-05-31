@@ -184,7 +184,7 @@ HPDeT(as.mcmc(tens.PS.N5T$MCMC.S.val),as.mcmc(randtens.PS.N5T$MCMC.S.val))# tens
 #eigentensor 1 has more error from G matrices fit with nearly noninformative prior
 
 pdf("~/GenoPheno/gmatrix/EigenValS_AnPopSoilG5trait.pdf",height=4,width=4)
-plot(unique(tens.PS.5T$tensor.summary[,1])~c(1:15),pch=16,ylab="Eigenvalues of eigentensors",xlab="",xaxt="n",main="Populations",ylim=c(0,2.5),xlim=c(0.5,16),cex=1,cex.axis=1,cex.lab=1,cex.main=1.2)
+plot(unique(tens.PS.5T$tensor.summary[,1])~c(1:15),pch=16,ylab="Eigenvalues of eigentensors",xlab="",xaxt="n",main="",ylim=c(0,2.5),xlim=c(0.5,16),cex=1,cex.axis=1,cex.lab=1,cex.main=1.2)
 points(unique(randtens.PS.5T$tensor.summary[,1])~c(1:15 + .5),pch=1,cex=1)
 arrows(c(1:15),unique(tens.PS.5T$tensor.summary[,1])[1:15],x1=c(1:15),y1=HPDet5T[1:15,1],length = 0)
 arrows(c(1:15),unique(tens.PS.5T$tensor.summary[,1])[1:15],x1=c(1:15),y1=HPDet5T[1:15,2],length = 0)
