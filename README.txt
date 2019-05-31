@@ -192,7 +192,17 @@ Script 016_plotPCA_swartsanna.R
 	output:	swartsannaPCA.pdf
 	packages: base R only
 	
-	
+Script 017_mapoflocations_figure.R
+	purpose: Plot of sampling locations
+	input:	bio_22_tif/**
+		alt_22.tif**
+		prec_22_tif/**
+		tmean_22_tif/**
+	output:	PopLocs.pdf
+		PopMonthlyTempPrecip.pdf
+	packages: geosphere, raster, ggmap, rgdal, dismo
+
+
 AOMexGBS2_ZeaGBSv27impV5.h5 is available in an alternate format on figshare, available upon publication 10.6084/m9.figshare.4714030
 
 Data from Swarts et al 2017 (Science, DOI: 10.1126/science.aam9425) obtained from: http://datacommons.cyverse.org/browse/iplant/home/shared/panzea/dataFromPubs/Swarts2017Science
