@@ -95,7 +95,7 @@ Script 007_heritability.R
 	packages: MCMCglmm
 	
 Script 008_eigentensors.R
-	purpose: eigentensor analysis of G matrices
+	purpose: eigentensor analysis of G matrices, companion script 008_eigentensors_subset.R is the same, except produces results without low elevation populations
 	input:	popsoil.animal.mods.5trait.Rdata
 			popsoil.animal.mods.nearlyimp.prior.5trait.Rdata
 			popsoil.animal.mods.nearlynoninf.prior.5trait.Rdata
