@@ -109,7 +109,7 @@ rbsoft2<- rgb(range01(Apopenvdat$TAnn),0,1-range01(Apopenvdat$TAnn),alpha=.1)
 damtoalphpop <- tapply(allped$dam.pop,allped$dam,mean)
 
 
-pdf("~/popdamtraits_mompopsepSE_soilpan_3onlycolY-axis.pdf",height=6,width=3)
+pdf("~/popdamtraits_3onlycol.pdf",height=6,width=3)
 	layout(matrix(1:9,ncol=3,byrow=T),heights=c(5,5,5),widths=c(0.75,0.9,1.1))
 		jitter1 <- jitter(rep(1,times=10),factor=3)
 		jitter2 <- jitter(rep(2,times=10),factor=3)
@@ -148,7 +148,7 @@ dev.off()
 
 
 # 
-pdf("~/popdamtraits_soilsOct2018_optionsMomPOPSOIL.pdf",height=8,width=8)
+pdf("~/popdamtraits_alllevelsalltraits.pdf",height=8,width=8)
 #all traits by mom,  soils on different lines
 	layout(matrix(1:27,ncol=3,byrow=T),width=c(4,1,0.75))
 	par(oma=c(0,0,1,2))
