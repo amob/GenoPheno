@@ -25,6 +25,10 @@ allped$dam.pop[which(allped$dam.pop=="ml")]="m"
 #if it is re-run with population of malinalco 6th in genotype order and labeled as "ML", it would come out 6th in both coancestry and factor levels
 allped$dam.pop<-as.numeric(as.factor(allped$dam.pop))
 allped$sire.pop<- as.numeric(as.factor(allped$sire.pop))
+#now ped pop numbers reflect alphabet, although dams still reflect field sample order, and sire #s are unrelated and unique for all
+# seeds in the same biota are extremely unlikely to share a father, since they come from different infructescences
+# note that between biota, seeds sharing a mom may also share a father, since they often come from the same set of infructescences in each biota, but this is not reflected in the pedigree
+#all analyses downstream that rely on relatedness are conducted separately across biota treatments for this reason.
 colnames(allpheno)[1]<- "ID"
 soils <- read.csv("~/GenoPheno/covmat.csv",stringsAsFactors=F,header=T)
 #split data into three matrices by soil
