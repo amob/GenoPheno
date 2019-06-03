@@ -19,6 +19,10 @@ allped$sire.pop[which(allped$sire.pop=="ml")]="m"
 allped$dam.pop[which(allped$dam.pop=="ml")]="m"#"m"is 5th.  "ML" would come out 6th. this is for consistency with other scripts/files.
 allped$dam.pop<-as.numeric(as.factor(allped$dam.pop))
 allped$sire.pop<- as.numeric(as.factor(allped$sire.pop))
+#now ped pop numbers reflect alphabet, although dams still reflect field sample order, and sire #s are unrelated and unique for all
+# seeds in the same biota are extremely unlikely to share a father, since they come from different infructescences
+# note that between biota, seeds sharing a mom may also share a father, since they often come from the same set of infructescences in each biota, but this is not reflected in the pedigree
+#all analyses that rely on relatedness are conducted separately across biota treatments for this reason.
 
 #quick function to scale a dataframe that also has an identifier column that should not be scaled
 IDscale <- function(inputdf,IDcol=1) {
