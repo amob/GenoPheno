@@ -4,18 +4,19 @@ Scripts with files used and made by scripts, packages, and notes
 **indicates files downloaded and from other published work
 
 Script 000_gxeonly.R
-	purpose: fit models for plastic respones, GxE of plant population or family to soil biota
+	purpose: fit models for plastic respones, GxE of plant population or family to soil biota. Note that this script has now been split into two versions. 000_gxeonly_models.R and 000_gxeonly_figures.R.
 	input:	phenomat.csv*
 			pedmat.csv*
 			covmat.csv*
 			AlphabeticalPopEnvDat.csv*
-	output:	popdamtraits_soils.pdf
-			traitgxemodels.Rdata
-			traitgxemodelsELEV.Rdata
-			traitgxemodelsTAnn.Rdata
-			traitgxemodelsPann.Rdata
-			traitgxemodelsSWC.Rdata
-			04_02_gxeresults.txt
+	output:	popdamtraits_3only.pdf (_figures.R)
+			popdamtraits_alllevelsalltraits.pdf (_figures.R)
+			traitgxemodels.Rdata (_models.R)
+			traitgxemodelsELEV.Rdata (_models.R)
+			traitgxemodelsTAnn.Rdata (_models.R)
+			traitgxemodelsPann.Rdata (_models.R)
+			traitgxemodelsSWC.Rdata (_models.R)
+			04_02_gxeresults.txt (_models.R)
 	packages: MCMCglmm
 
 Script: 001_formatgenos.sh (uses tassel version 5 to handle h5 file)
