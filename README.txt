@@ -1,14 +1,13 @@
 # GenoPheno
 Scripts with files used and made by scripts, packages, and notes
-*indicates files must be provided by authors
 **indicates files downloaded and from other published work
 
 Script 000_gxeonly.R
 	purpose: fit models for plastic respones, GxE of plant population or family to soil biota. Note that this script has now been split into two versions. 000_gxeonly_models.R and 000_gxeonly_figures.R.
-	input:	phenomat.csv*
-			pedmat.csv*
-			covmat.csv*
-			AlphabeticalPopEnvDat.csv*
+	input:		phenomat.csv
+			pedmat.csv
+			covmat.csv
+			AlphabeticalPopEnvDat.csv
 	output:	popdamtraits_3only.pdf (_figures.R)
 			popdamtraits_alllevelsalltraits.pdf (_figures.R)
 			traitgxemodels.Rdata (_models.R)
@@ -21,7 +20,7 @@ Script 000_gxeonly.R
 
 Script: 001_formatgenos.sh (uses tassel version 5 to handle h5 file)
 	purpose: formats genotype file, filters to sites with data in 95% of samples
-	input:	AOMexGBS2_ZeaGBSv27impV5.h5*
+	input:	AOMexGBS2_ZeaGBSv27impV5.h5 * must be obtained from figshare
 	output: AOMexGBS2_ZeaGBSv27impV5_95filter.plk.ped 
 			AOMexGBS2_ZeaGBSv27impV5_95filter.plk.map
 	packages: gcc jdk/1.8 tassel/5
@@ -30,8 +29,8 @@ Script: 002_RAFM_taxa95.R
 	purpose: fits coancestry matrix, makes coancestry figure
 	of note: one pop is alternately labeled ML vs M. Factors in R sort by alphabet, but RAFM sorts by order it encounters a population in the input dataframes
 	input:	AOMexGBS2_ZeaGBSv27impV5_95filter.plk.ped
-			popmomlabel.csv*
-			AlphabeticalPopEnvDat.csv*
+			popmomlabel.csv
+			AlphabeticalPopEnvDat.csv
 	output: AOMexGBS2_ZeaGBSv27impV5_95filter_Rthin.ped
 			allcoan_Rthin_f95_LG.txt
 			ALLrafmcoan_f95_LG2MXANNA.pdf
@@ -41,10 +40,10 @@ Script 003_drifsel_med95_scaledtraits_allsoilsandhigh.R
 	purpose: performs driftsel analysis, S and H tests
 	of note: different amounts of thinning for some of the highland samples only runs
 	input:	allcoan_Rthin_f95_LG.txt
-			phenomat.csv*
-			pedmat.csv*
-			covmat.csv*
-			AlphabeticalPopEnvDat.csv*
+			phenomat.csv
+			pedmat.csv
+			covmat.csv
+			AlphabeticalPopEnvDat.csv
 	output:	scaledtraits.samp.mt_med_LG95
 			scaledtraits.samp.mc_med_LG95.Rdata
 			scaledtraits.samp.tc_med_LG95.Rdata
@@ -65,7 +64,7 @@ Script 004_Driftsel_results_figures.R
 			scaledtraits.samp.mt.h_med_LG95_440k.Rdata
 			scaledtraits.samp.mc.h_med_LG95_440k.Rdata
 			scaledtraits.samp.tc.h_med_LG95_440k.Rdata
-			AlphabeticalPopEnvDat.csv*
+			AlphabeticalPopEnvDat.csv
 	output:	dtf and stw 440k.pdf
 			sigdiffs by pop and trait CI 95 names means torder 440.pdf
 			bivariate sigdiffs by trait CI 95 names means torder 440.pdf
@@ -73,9 +72,9 @@ Script 004_Driftsel_results_figures.R
 
 Script 005_5traitAnimalModelComparison.R
 	purpose: fit G matrices
-	input:	phenomat.csv*
-			pedmat.csv*
-			covmat.csv*
+	input:	phenomat.csv
+			pedmat.csv
+			covmat.csv
 	output:	popsoil.animal.mods.5trait.Rdata
 			popsoil.animal.mods.nearlyimp.prior.5trait.Rdata
 			popsoil.animal.mods.nearlynoninf.prior.5trait.Rdata
@@ -101,7 +100,7 @@ Script 008_eigentensors.R
 			popsoil.animal.mods.nearlyimp.prior.5trait.Rdata
 			popsoil.animal.mods.nearlynoninf.prior.5trait.Rdata
 			Popsoil_Peds.Rdata
-			AlphabeticalPopEnvDat.csv*
+			AlphabeticalPopEnvDat.csv
 	output:	EigenValS_AnPopSoilG5trait.pdf
 			TraitsPopSoilEigenVofEigenT5traits.pdf
 			PopsoilTensor1.5trait.pdf
@@ -114,7 +113,7 @@ Script 009_selproj.R
 			popsoil.animal.mods.nearlyimp.prior.5trait.Rdata
 			popsoil.animal.mods.nearlynoninf.prior.5trait.Rdata
 			Popsoil_Peds.Rdata
-			AlphabeticalPopEnvDat.csv*
+			AlphabeticalPopEnvDat.csv
 	output:	cont2SelSkews3_5Trait.pdf
 			soil_sel_all.pdf
 	packages: ks, MCMCglmm, dependencies
@@ -125,16 +124,16 @@ Script 010_Gmatplots.R
 			popsoil.animal.mods.nearlyimp.prior.5trait.Rdata
 			popsoil.animal.mods.nearlynoninf.prior.5trait.Rdata
 			Popsoil_Peds.Rdata
-			AlphabeticalPopEnvDat.csv*
+			AlphabeticalPopEnvDat.csv
 	output: RawGAnPopsoil5trait.pdf
 	packages: MCMCglmm
 
 
 Script 011_swartssnps1.sh
-	purpose: generate missingness data, filter to taxa to use in PCA
-	input:	AOMexGBS2_ZeaGBSv27impV5.h5*
+	purpose: generate missingness data, filter to taxa to use in PCA. please see https://doi.org/10.6084/m9.figshare.4714030.v1 for data files
+	input:	AOMexGBS2_ZeaGBSv27impV5.h5
 			MinimallyFilteredWithNAM_InbredLandraces_InbredTeosintes.vcf**
-			012_keeptaxa.R*
+			012_keeptaxa.R
 	output:	AOMexGBS2_ZeaGBSv27impV5.vcf
 			missing_swarts2017.imiss
 			missing_AOMexGBS2.imiss
@@ -142,7 +141,7 @@ Script 011_swartssnps1.sh
 
 Script 012_keeptaxa.R
 	purpose: get a set of samples with enough SNP calls from both datasets to use in PCA
-	input:	swarts_taxatokeep_firstpass.csv*
+	input:	swarts_taxatokeep_firstpass.csv
 			missing_swarts2017.imiss
 			missing_AOMexGBS2.imiss
 	output:	SwartsKeepTaxa_indFilt70.txt
@@ -194,9 +193,9 @@ Script 016_plotPCA_swartsanna.R
 	packages: base R only
 	
 Script 017_mapoflocations_figure.R
-	purpose: Plot of sampling locations
+	purpose: Plot of sampling locations. All input files are directories obtained from worldclim (and bioclim): https://www.worldclim.org/
 	input:	bio_22_tif/**
-		alt_22.tif**
+		alt_22.tif/**
 		prec_22_tif/**
 		tmean_22_tif/**
 	output:	PopLocs.pdf
@@ -204,6 +203,6 @@ Script 017_mapoflocations_figure.R
 	packages: geosphere, raster, ggmap, rgdal, dismo
 
 
-AOMexGBS2_ZeaGBSv27impV5.h5 is available in an alternate format on figshare, available upon publication 10.6084/m9.figshare.4714030
+
 
 Data from Swarts et al 2017 (Science, DOI: 10.1126/science.aam9425) obtained from: http://datacommons.cyverse.org/browse/iplant/home/shared/panzea/dataFromPubs/Swarts2017Science
