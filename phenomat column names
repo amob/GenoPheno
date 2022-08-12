@@ -1,0 +1,14 @@
+id: identification number of pot in experiment
+flowerday: days since planting that first floral structure emerged
+FMflowerdiff: difference in days between the emergence of the first floral structure (usually a tassel) and the first floral structure for the opposite gametes (usually silks)
+germday: days since planting that first germinant emerged (three seeds were planted per pot, only first emergence recorded)
+espigalength: length of male tassel, if more than one, is apical tassel, cm
+shoot: dried biomass of shoot structures, grams
+root: dried biomass of root structures
+finalheight: distance from soil to highest ligule at harvest
+finalstemw: width of stem above highest roots at harvest
+numlvs: total number of live leaves at harvest
+numflwrleaves: number of leaves subtending floral structures at harvest
+length3leaf: length of the third true leaf at full expansion
+width3leaf: width of the third true leaf at full expansion
+red,green,blue: proportions of pixel color intensity in R, G, and B
